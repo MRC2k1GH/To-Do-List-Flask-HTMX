@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+</head>
+<body>
+   <h1>ToDo List</h1>
+   <form hx-post="/add" hx-swap="beforeend:#todo-list" hx-target="#todo-list" method="post">
+    <input type="text" name="todo" placeholder="Enter a new to-do" required>
+    <button type="submit">Add</button>
+   </form> 
+   <ul id="todo-list">
+    {% for todo in todos %}
+    <li id="{{ todo._id }}">{{ todo.text }}
+    <button hx-delete="/delete/{{ todo._id }}" hx-swap="delete" hx-target="closest li">Delete</button>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
+
+
+
+
+
